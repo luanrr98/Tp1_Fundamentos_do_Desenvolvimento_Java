@@ -15,17 +15,15 @@ public class ControleAcademico {
 		nota1[contador] = in.nextFloat();
 		System.out.print("Digite a segunda nota: ");
 		nota2[contador] = in.nextFloat();
-		
 	}
 
 // Método para calcular e devolver a média das notas de um aluno
-	public static float calcularMedia(int indice) {
-		float media = (nota1[indice]+nota2[indice])/2;
-		return media;
+	public static float calcularMedia(int indice){
+		return (nota1[indice]+nota2[indice])/2;
 	}
 	
 // Método para definir e devolver a situação de um aluno, como Aprovado, Reprovado e Prova Final
-	public static String definirSituacao(float media) {
+	public static String definirSituacao(float media){
 		if(media < 4) {
 			return "Reprovado";
 		}
@@ -48,22 +46,19 @@ public class ControleAcademico {
 			System.out.printf("Média final: %.2f\n", media);
 			System.out.println("Situação: "+definirSituacao(media));
 			System.out.println();
-
 		}
-
 	}
 	
 //Método para mostrar o boletin de todos os alunos cadastrados, verificando se não se trata de um aluno nulo	
-	public static void mostrarTodosBoletins() {
+	public static void mostrarTodosBoletins(){
 			for(int i = 0; i < aluno.length; i++) {
 				if(aluno[i]==null) {
 					break;
 				}
 				mostrarBoletin(i);
 			}
-		
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		do {
 			
 			System.out.println("Bem-Vindo ao sistema acadêmico!");
