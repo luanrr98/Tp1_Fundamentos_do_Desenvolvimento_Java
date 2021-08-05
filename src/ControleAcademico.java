@@ -1,14 +1,20 @@
 import java.util.Scanner;
 public class ControleAcademico {
-	static String[] aluno = new String[100];
-	static float[] nota1 = new float[100];
-	static float[] nota2 = new float[100];
-	static Scanner in = new Scanner(System.in);
-	static String opcao;
-	static int contador = 0;
+	private static int TAMANHO_VETORES = 100;
+	private static String[] aluno = new String[TAMANHO_VETORES];
+	private static float[] nota1 = new float[TAMANHO_VETORES];
+	private static float[] nota2 = new float[TAMANHO_VETORES];
+	private static Scanner in = new Scanner(System.in);
+	private static int opcao;
+	private static int contador;
+	
+// Método ara validar se o aluno a ser cadastrado ja não passou do indice 99 do vetor
+	private static  boolean validar() {
+		return contador<100;		
+	}
 
 // Método para adicionar um aluno e suas notas
-	public static void adicionarAluno(){
+	private static void adicionarAluno(){
 		System.out.print("Digite o nome do(a) aluno(a): ");
 		aluno[contador] = in.next();
 		System.out.print("Digite a primeira nota: ");
@@ -18,12 +24,12 @@ public class ControleAcademico {
 	}
 
 // Método para calcular e devolver a média das notas de um aluno
-	public static float calcularMedia(int indice){
+	private static float calcularMedia(int indice){
 		return (nota1[indice]+nota2[indice])/2;
 	}
 	
 // Método para definir e devolver a situação de um aluno, como Aprovado, Reprovado e Prova Final
-	public static String definirSituacao(float media){
+	private static String definirSituacao(float media){
 		if(media < 4) {
 			return "Reprovado";
 		}
@@ -34,7 +40,7 @@ public class ControleAcademico {
 	}
 	
 // Método para mostrar o Boletim de um aluno, verificando se ele está cadastrado
-	public static void mostrarBoletin(int indice) {
+	private static void mostrarBoletin(int indice) {
 		if(aluno[indice]==null) {
 			System.out.println("ALUNO NÃO CADASTRADO!");
 		}else {
@@ -50,7 +56,7 @@ public class ControleAcademico {
 	}
 	
 //Método para mostrar o boletin de todos os alunos cadastrados, verificando se não se trata de um aluno nulo	
-	public static void mostrarTodosBoletins(){
+	private static void mostrarTodosBoletins(){
 			for(int i = 0; i < aluno.length; i++) {
 				if(aluno[i]==null) {
 					break;
@@ -69,37 +75,42 @@ public class ControleAcademico {
 			System.out.println("[4] Sair.");
 			System.out.println();
 			System.out.print("Digite sua opção: ");
-			opcao = in.next();
+			opcao = in.nextInt();
 			System.out.println();
 
 			
 			switch(opcao){
-			case "1":
-				adicionarAluno();
-				System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
-				System.out.println();
-				contador++; // Uma variavél de contagem para manter o próximo indice dos arrays aluno, nota e nota 2
+			case 1:
+				if(validar()) { // Validando se o número máximo de alunos ja não foi excedido
+					adicionarAluno();
+					System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
+					System.out.println();
+					contador++; // Uma variavél de contagem para manter o próximo indice dos arrays aluno, nota e nota 2
+				}else {
+					System.out.println("Operação Inválida, o número máximo de alunos será excedido!");
+					System.out.println();
+
+				}
 				break;
-			case "2":
+			case 2:
 				System.out.print("Digite o código do(a) aluno(a): ");
 				int indice = in.nextInt();
 				mostrarBoletin(indice);		
 
 				break;
-			case "3":
+			case 3:
 				mostrarTodosBoletins();
 				break;
-			case "4":
+			case 4:
 				System.out.println();
 				System.out.println("Saindo do programa...");
 				break;
 			default:
 				System.out.println("Opção inválida");
-				break;
-					
+				break;	
 			}
 
-		}while(opcao != "4");
+		}while(opcao != 4);
 		in.close();
 
 	}
