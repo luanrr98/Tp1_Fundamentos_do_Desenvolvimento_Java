@@ -1,6 +1,6 @@
 import java.util.Scanner;
 public class ControleAcademico {
-	private static int TAMANHO_VETORES = 100;
+	private static final int TAMANHO_VETORES = 100;
 	private static String[] aluno = new String[TAMANHO_VETORES];
 	private static float[] nota1 = new float[TAMANHO_VETORES];
 	private static float[] nota2 = new float[TAMANHO_VETORES];
@@ -9,7 +9,7 @@ public class ControleAcademico {
 	private static int contador;
 	
 // Método ara validar se o aluno a ser cadastrado ja não passou do indice 99 do vetor
-	private static  boolean validar() {
+	private static  boolean validarLimiteVetor() {
 		return contador<100;		
 	}
 
@@ -81,7 +81,7 @@ public class ControleAcademico {
 			
 			switch(opcao){
 			case 1:
-				if(validar()) { // Validando se o número máximo de alunos ja não foi excedido
+				if(validarLimiteVetor()) { // Validando se o número máximo de alunos ja não foi excedido
 					adicionarAluno();
 					System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
 					System.out.println();
