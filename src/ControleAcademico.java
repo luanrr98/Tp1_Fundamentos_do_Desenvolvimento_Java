@@ -5,7 +5,7 @@ public class ControleAcademico {
 	private static float[] nota1 = new float[TAMANHO_VETORES];
 	private static float[] nota2 = new float[TAMANHO_VETORES];
 	private static Scanner in = new Scanner(System.in);
-	private static int opcao;
+	private static String opcao;
 	private static int contador;
 	
 // Método ara validar se o aluno a ser cadastrado ja não passou do indice 99 do vetor
@@ -75,12 +75,12 @@ public class ControleAcademico {
 			System.out.println("[4] Sair.");
 			System.out.println();
 			System.out.print("Digite sua opção: ");
-			opcao = in.nextInt();
+			opcao = in.next();
 			System.out.println();
 
 			
 			switch(opcao){
-			case 1:
+			case "1":
 				if(validarLimiteVetor()) { // Validando se o número máximo de alunos ja não foi excedido
 					adicionarAluno();
 					System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
@@ -92,25 +92,27 @@ public class ControleAcademico {
 
 				}
 				break;
-			case 2:
+			case "2":
 				System.out.print("Digite o código do(a) aluno(a): ");
 				int indice = in.nextInt();
 				mostrarBoletin(indice);		
 
 				break;
-			case 3:
+			case "3":
 				mostrarTodosBoletins();
 				break;
-			case 4:
+			case "4":
 				System.out.println();
 				System.out.println("Saindo do programa...");
 				break;
 			default:
 				System.out.println("Opção inválida");
+				System.out.println();
+				
 				break;	
 			}
 
-		}while(opcao != 4);
+		}while(!opcao.equals("4"));
 		in.close();
 
 	}
