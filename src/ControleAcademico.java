@@ -5,8 +5,8 @@ public class ControleAcademico {
 	private static float[] nota1 = new float[TAMANHO_VETORES];
 	private static float[] nota2 = new float[TAMANHO_VETORES];
 	private static Scanner in = new Scanner(System.in);
-	private static String opcao;
-	private static int contador;
+	private static String opcao = null;
+	private static int contador = 0;
 	
 // Método ara validar se o aluno a ser cadastrado ja não passou do indice 99 do vetor
 	private static  boolean validarLimiteVetor() {
@@ -112,7 +112,7 @@ public class ControleAcademico {
 				break;	
 			}
 
-		}while(!opcao.equals("4"));
+		}while(!"4".equals(opcao));
 		in.close();
 
 	}
