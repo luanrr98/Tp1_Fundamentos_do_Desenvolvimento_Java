@@ -5,10 +5,9 @@ public class ControleAcademico {
 	private static float[] nota1;
 	private static float[] nota2;
 	private static Scanner in = new Scanner(System.in);
-	private static int contador = 0;
 	
 // Método para adicionar um aluno e suas notas
-	private static void adicionarAluno(){
+	private static void adicionarAluno(int contador){
 		System.out.print("Digite o nome do(a) aluno(a): ");
 		aluno[contador] = in.next();
 		System.out.print("Digite a primeira nota: ");
@@ -45,18 +44,12 @@ public class ControleAcademico {
 		System.out.println();
 	}
 	
-	
-//Método para mostrar o boletin de todos os alunos cadastrados, verificando se não se trata de um aluno nulo	
-	private static void mostrarTodosBoletins(){
-			for(int i = 0; i < contador; i++) {
-				mostrarBoletin(i);
-			}
-	}
 	public static void main(String[] args){
 		String opcao = null;
 		aluno = new String[TAMANHO_VETORES];
 		nota1 = new float[TAMANHO_VETORES];
 		nota2 = new float[TAMANHO_VETORES];
+		int contador = 0;
 
 		do {
 			System.out.println("===============================");
@@ -75,7 +68,7 @@ public class ControleAcademico {
 			switch(opcao){
 			case "1":
 				if(contador < TAMANHO_VETORES) { // Validando se o número máximo de alunos ja não foi excedido
-					adicionarAluno();
+					adicionarAluno(contador);
 					System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
 					System.out.println();
 					contador++; // Uma variavél de contagem para manter o próximo indice dos arrays aluno, nota e nota 2
@@ -99,7 +92,9 @@ public class ControleAcademico {
 
 				break;
 			case "3":
-				mostrarTodosBoletins();
+				for(int i = 0; i < contador; i++) {
+					mostrarBoletin(i);
+				}
 				break;
 			case "4":
 				System.out.println();
