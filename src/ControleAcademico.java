@@ -1,18 +1,12 @@
 import java.util.Scanner;
 public class ControleAcademico {
 	private static final int TAMANHO_VETORES = 100;
-	private static String[] aluno = new String[TAMANHO_VETORES];
-	private static float[] nota1 = new float[TAMANHO_VETORES];
-	private static float[] nota2 = new float[TAMANHO_VETORES];
+	private static String[] aluno;
+	private static float[] nota1;
+	private static float[] nota2;
 	private static Scanner in = new Scanner(System.in);
-	private static String opcao = null;
 	private static int contador = 0;
 	
-// Método ara validar se o aluno a ser cadastrado ja não passou do indice 99 do vetor
-	private static  boolean validarLimiteVetor() {
-		return contador<100;		
-	}
-
 // Método para adicionar um aluno e suas notas
 	private static void adicionarAluno(){
 		System.out.print("Digite o nome do(a) aluno(a): ");
@@ -41,32 +35,31 @@ public class ControleAcademico {
 	
 // Método para mostrar o Boletim de um aluno, verificando se ele está cadastrado
 	private static void mostrarBoletin(int indice) {
-		if(aluno[indice]==null) {
-			System.out.println("ALUNO NÃO CADASTRADO!");
-		}else {
-		
-			float media = calcularMedia(indice);
-			System.out.println("Nome do(a) Aluno(a): "+aluno[indice]);
-			System.out.println("Nota da AV1: "+nota1[indice]);
-			System.out.println("Nota da Av2: "+nota2[indice]);
-			System.out.printf("Média final: %.2f\n", media);
-			System.out.println("Situação: "+definirSituacao(media));
-			System.out.println();
-		}
+		float media = calcularMedia(indice);
+		System.out.printf("Nome do(a) Aluno(a): %s\n "
+				+ "Nota da AV1: %.2f\n "
+				+ "Nota da AV2: %.2f\n "
+				+ "Média final: %.2f\n "
+				+ "Situação: %s\n", 
+				aluno[indice], nota1[indice], nota2[indice], media, definirSituacao(media));
+		System.out.println();
 	}
+	
 	
 //Método para mostrar o boletin de todos os alunos cadastrados, verificando se não se trata de um aluno nulo	
 	private static void mostrarTodosBoletins(){
-			for(int i = 0; i < aluno.length; i++) {
-				if(aluno[i]==null) {
-					break;
-				}
+			for(int i = 0; i < contador; i++) {
 				mostrarBoletin(i);
 			}
 	}
 	public static void main(String[] args){
+		String opcao = null;
+		aluno = new String[TAMANHO_VETORES];
+		nota1 = new float[TAMANHO_VETORES];
+		nota2 = new float[TAMANHO_VETORES];
+
 		do {
-			
+			System.out.println("===============================");
 			System.out.println("Bem-Vindo ao sistema acadêmico!");
 			System.out.println("===============================");
 			System.out.println("[1] Registrar as notas de um novo(a) aluno(a).");
@@ -81,7 +74,7 @@ public class ControleAcademico {
 			
 			switch(opcao){
 			case "1":
-				if(validarLimiteVetor()) { // Validando se o número máximo de alunos ja não foi excedido
+				if(contador < TAMANHO_VETORES) { // Validando se o número máximo de alunos ja não foi excedido
 					adicionarAluno();
 					System.out.println("O código do(a) aluno(a) "+aluno[contador]+ " é: "+contador);	
 					System.out.println();
@@ -95,7 +88,14 @@ public class ControleAcademico {
 			case "2":
 				System.out.print("Digite o código do(a) aluno(a): ");
 				int indice = in.nextInt();
-				mostrarBoletin(indice);		
+				if(indice<TAMANHO_VETORES && aluno[indice]!=null){ // Validação para verificar se o índice digitado não está acima do limite do vetor ou se é não está "vazio"
+					mostrarBoletin(indice);		
+				} else {
+					System.out.println("O o código digitado é inválido");
+					System.out.println();
+
+				}
+				
 
 				break;
 			case "3":
