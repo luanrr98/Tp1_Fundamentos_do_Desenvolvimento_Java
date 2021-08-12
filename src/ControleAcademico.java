@@ -81,10 +81,10 @@ public class ControleAcademico {
 			case "2":
 				System.out.print("Digite o código do(a) aluno(a): ");
 				int indice = in.nextInt();
-				if(indice<TAMANHO_VETORES && aluno[indice]!=null){ // Validação para verificar se o índice digitado não está acima do limite do vetor ou se é não está "vazio"
+				if(indice<contador && indice >= 0){ // Validação para verificar se o índice digitado não está acima do limite do vetor ou se é não está "vazio"
 					mostrarBoletin(indice);		
 				} else {
-					System.out.println("O o código digitado é inválido");
+					System.out.println("O código digitado é inválido");
 					System.out.println();
 
 				}
